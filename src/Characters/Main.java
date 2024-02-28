@@ -90,6 +90,7 @@ public static void rest(Character Player, Character Enemy)
         else
             {
                 System.out.println("Enemy is dead");
+                x.setDurability(x.getDurability()+5);
                 Enemy = null;
             }
         }
