@@ -16,10 +16,12 @@ public class Main
         String swordname=null;
         boolean yesno = false;
         if(yn==1)
+
+
         {
             yesno = true;
             System.out.print("Name your sword -> ");
-            swordname = sc.nextLine();
+            swordname = sc.next();
         }
         sc.close();
 
