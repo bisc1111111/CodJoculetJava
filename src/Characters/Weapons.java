@@ -1,12 +1,13 @@
 package Characters;
 
-public class Items
+public class Weapons
 {
     public String Name;
     public float DamageUp;
     public float Durability;
     public boolean Owned;
-    public Items(String name, float damageUp, float durability, boolean owned)
+
+    public Weapons(String name, float damageUp, float durability, boolean owned)
     {
         super();
         this.Name = name;
@@ -14,8 +15,8 @@ public class Items
         this.Durability = durability;
         this.Owned = owned;
     }
-                        // Setters
 
+                        // Setters
     public void setName(String name) {this.Name = name;}
     public void setDurability(float durability) {Durability = durability;}
     public void setDamageUp(float damageUp) {DamageUp = damageUp;}
