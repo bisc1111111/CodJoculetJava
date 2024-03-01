@@ -116,14 +116,23 @@ public class Main {
     }
 
     public static void enemyAttacksPlayer(Character E, Character P, Armor a) {
-        if (P.HP >= 1 && E.getHP() >= 1)
+        if (P.HP >= 1 && E.getHP() >= 1 && E.getEnergy()>=10)
         {
             if (!a.isOwned) {
+                E.setEnergy(E.getEnergy()-10);
                 P.setHP(P.getHP() - E.getDamage());
                 System.out.println("Enemy hit you dealing " + E.getDamage() + " damage and you have " + P.getHP() + " HP left");
-            } else {
+            }
+            else if (E.getEnergy()<=9)
+            {
+                System.out.println("Enemy has no energy and cannot attack");
+
+            }
+            else
+            {
                 P.setHP(P.getHP() - (E.getDamage() - a.getDamageReduction() / 100 * E.getDamage()));
                 a.setDurability(a.getDurability() - (E.getDamage() * (((float) 1 / 3) * a.getDamageReduction())));
+                E.setEnergy(E.getEnergy()-10);
             }
         }
         else
