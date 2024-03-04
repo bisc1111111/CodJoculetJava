@@ -1,14 +1,18 @@
 package Characters;
 
+
 import java.util.Scanner;
 import java.util.Random; // De folosit pentru atacuri secundare
 
 public class Main {
     public static void main(String[] args) {
         // Creare instante de caractere Player si Enemy
+        Random randomNumber = new Random();
+        int upperRandom = 100;
+        int alegereRandom = randomNumber.nextInt(upperRandom);
         Scanner sc = new Scanner(System.in);
-        Character Player = new Character(100, 100, 10);
-        Character Enemy = new Character(50, 100, 2);
+        Character Player = new Character(100, 100, 10,0,0);
+        Character Enemy = new Character(50, 100, 2,-1,-1);
 
         System.out.print("You found a sword on your way, do you want to pick it up? (1 for yes, 0 for no) -> ");
         int yn = sc.nextInt();
@@ -21,7 +25,9 @@ public class Main {
             swordname = sc.next();
         }
         Scanner sc2 = new Scanner(System.in);
+
         System.out.print("You find a piece of armor on the ground, would you like to pick it up? (1 for yes, 0 for no) -> ");
+
         yn = sc2.nextInt();
         Armor armor1 = new Armor(" ", 0, 0);
         armor1.setOwned(false);
@@ -44,40 +50,46 @@ public class Main {
         // ACTIUNI //// ACTIUNI //// ACTIUNI //// ACTIUNI //// ACTIUNI //// ACTIUNI // ACTIUNI //// ACTIUNI //// ACTIUNI //// ACTIUNI //// ACTIUNI //
         rest(Player, Enemy);
 
+        System.out.println("[Level] Player = " + Player.getLevel());
+        System.out.println("[XP] Player = " + Player.getXPPoints());
+
+        //  Player.setXPPoints(5000);
         //  while(Enemy.getHP()>=1)
         System.out.println("[Durability] " + Sword.getName() + " = " + Sword.getDurability());
         System.out.println("[Energy] Player = " + Player.getEnergy());
         System.out.println("[HP] Enemy = " + Enemy.getHP());
-        attackEnemy(Player, Enemy, Sword);
-        System.out.println("[Durability] " + Sword.getName() + " = " + Sword.getDurability());
-        System.out.println("[Energy] Player = " + Player.getEnergy());
-        System.out.println("[HP] Enemy = " + Enemy.getHP());
-        attackEnemy(Player, Enemy, Sword);
-        System.out.println("[Durability] " + Sword.getName() + " = " + Sword.getDurability());
-        System.out.println("[Energy] Player = " + Player.getEnergy());
-        System.out.println("[HP] Enemy = " + Enemy.getHP());
-        attackEnemy(Player, Enemy, Sword);
+        for (int i = 0; i < 3; i++) {
+            attackEnemy(Player, Enemy, Sword);
+        }
         System.out.println("[Durability] " + Sword.getName() + " = " + Sword.getDurability());
         System.out.println("[Energy] Player = " + Player.getEnergy());
         System.out.println("[HP] Enemy = " + Enemy.getHP());
 
-
+        HPUp(Player, 100000);
         System.out.println("[HP] Player = " + Player.getHP());
         System.out.println("[Durability] Armor = " + armor1.getDurability());
+
         enemyAttacksPlayer(Enemy, Player, armor1);
-        System.out.println("[Durability] Armor = " + armor1.getDurability());
 
         System.out.println("[HP] Player = " + Player.getHP());
-        System.out.println("[HP] Enemy = " + Enemy.getHP());
-        System.out.println("[Energy] Player = " + Player.getEnergy());
-        System.out.println("[Durability] " + Sword.getName() + " = " + Sword.getDurability());
+        System.out.println("[Durability] Armor = " + armor1.getDurability());
 
+
+        // System.out.println("[HP] Enemy = " + Enemy.getHP());
+        // System.out.println("[Energy] Player = " + Player.getEnergy());
+        // System.out.println("[Durability] " + Sword.getName() + " = " + Sword.getDurability());
+
+
+
+
+        System.out.println("[Level] Player = " + Player.getLevel());
+        System.out.println("[XP] Player = " + Player.getXPPoints());
         rest(Player, Enemy);
 
     }
 
-    public static void HPUp(Character Player, float n) {
-        Player.setHP(Player.getHP() + n);
+    public static void HPUp(Character x, float n) {
+        x.setHP(x.getHP() + n);
     }
 
     public static void rest(Character Player, Character Enemy) {
@@ -105,13 +117,19 @@ public class Main {
             }
             Player.setEnergy(Player.getEnergy() - 10);
             Enemy.HP = Enemy.HP - Player.Damage;
+            if(Enemy.HP<=0)
+            {
+                Player.setXPPoints(Player.getXPPoints()+20);
+                if(Player.getXPPoints() >= (25 * Player.getLevel()))
+                {
+                    Player.setLevel(Player.getLevel()+1);
+                    Player.setXPPoints(0);
+                    System.out.println("TEST");
+                }
+                System.out.println("Enemy is dead");
+                Enemy = null;
+            }
             System.out.println("Enemy has been attacked for " + Player.getDamage() + " damage");
-        }
-        else
-        {
-            System.out.println("Enemy is dead");
-            // x.setDurability(x.getDurability() + 5);
-            Enemy = null;
         }
     }
 
