@@ -12,14 +12,13 @@ public class Main {
         int alegereRandom = randomNumber.nextInt(upperRandom);
         Scanner sc = new Scanner(System.in);
         Character Player = new Character(100, 100, 10,0,0);
-        Character Enemy = new Character(50, 100, 2,-1,-1);
+        Character Enemy = new Character(50, 100, 2,0,0);
 
         System.out.print("You found a sword on your way, do you want to pick it up? (1 for yes, 0 for no) -> ");
         int yn = sc.nextInt();
         String swordname = null;
         boolean yesno = false;
         if (yn == 1) {
-            yn = 0;
             yesno = true;
             System.out.print("Name your sword -> ");
             swordname = sc.next();
