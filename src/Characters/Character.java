@@ -11,9 +11,9 @@ public class Character
             public Character(float HP, float energy, float damage, float xp,float lvl)
         {
             super();
-            this.Energy = (float) (energy + 1.36*lvl);
-            this.Damage = (float) (damage + 2.44*lvl);
-            this.HP = (float) (HP + lvl*66.6);
+            this.Energy = energy;
+            this.Damage = damage;
+            this.HP = HP;
             this.XPPoints = xp;
             this.Level = lvl;
         }
@@ -21,7 +21,15 @@ public class Character
     public void setHP(float HP) { this.HP = HP; }
     public void setDamage(float damage) { this.Damage = damage; }
     public void setEnergy(float energy) { this.Energy = energy; }
-    public void setXPPoints(float xp) { this.XPPoints = xp; }
+    public void setXPPoints(float xp)
+    {
+        this.XPPoints = xp;
+        if(this.getXPPoints()>=this.getLevel() && this.getXPPoints() >= (this.getLevel()+1)*25) {
+            this.setLevel(this.getLevel() + 1);
+            this.setXPPoints(getXPPoints()-this.getLevel()*25);
+            System.out.println("TEST");
+        }
+    }
     public void setLevel(float lvl) { this.Level = lvl; }
 
                         // Getters

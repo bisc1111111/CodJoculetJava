@@ -22,14 +22,16 @@ public class Main {
             yesno = true;
             System.out.print("Name your sword -> ");
             swordname = sc.next();
+
         }
         Scanner sc2 = new Scanner(System.in);
-
+        Weapons Sword = new Weapons(swordname, 20, 100, yesno);
         System.out.print("You find a piece of armor on the ground, would you like to pick it up? (1 for yes, 0 for no) -> ");
 
         yn = sc2.nextInt();
         Armor armor1 = new Armor(" ", 0, 0);
         armor1.setOwned(false);
+
         if (yn == 1) {
             armor1.setName("Level 1 Armor");
             armor1.setDamageReduction(3);
@@ -39,7 +41,7 @@ public class Main {
         sc.close();
         sc2.close();
 
-        Weapons Sword = new Weapons(swordname, 20, 100, yesno);
+
 
         if (Sword.isOwned() && Sword.getDurability() >= 1) {
             Player.setDamage(Player.getDamage() + Sword.getDamageUp());
@@ -64,7 +66,7 @@ public class Main {
         System.out.println("[Energy] Player = " + Player.getEnergy());
         System.out.println("[HP] Enemy = " + Enemy.getHP());
 
-        HPUp(Player, 100000);
+        //     HPUp(Player, 100000);
         System.out.println("[HP] Player = " + Player.getHP());
         System.out.println("[Durability] Armor = " + armor1.getDurability());
 
@@ -112,21 +114,14 @@ public class Main {
             else if (x.isOwned())
             {
                 x.setOwned(false);
-                x = null;
+                Player.setDamage(Player.getDamage()-x.getDamageUp());
             }
             Player.setEnergy(Player.getEnergy() - 10);
             Enemy.HP = Enemy.HP - Player.Damage;
             if(Enemy.HP<=0)
             {
-                Player.setXPPoints(Player.getXPPoints()+20);
-                if(Player.getXPPoints() >= (25 * Player.getLevel()))
-                {
-                    Player.setLevel(Player.getLevel()+1);
-                    Player.setXPPoints(0);
-                    System.out.println("TEST");
-                }
+                Player.setXPPoints(Player.getXPPoints()+25);
                 System.out.println("Enemy is dead");
-                Enemy = null;
             }
             System.out.println("Enemy has been attacked for " + Player.getDamage() + " damage");
         }
