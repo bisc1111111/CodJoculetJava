@@ -1,4 +1,6 @@
-package Characters;
+package Game;
+
+import java.awt.*;
 
 public class Weapons
 {
@@ -6,6 +8,9 @@ public class Weapons
     public float DamageUp;
     public float Durability;
     public boolean Owned;
+    public int weaponX;
+    public int weaponY;
+    public int pos;
 
     public Weapons(String name, float damageUp, float durability, boolean owned)
     {
@@ -16,7 +21,13 @@ public class Weapons
         this.Owned = owned;
     }
 
-                        // Setters
+    public Weapons(int weaponX, int weaponY) {
+        super();
+        this.weaponX = weaponX;
+        this.weaponY = weaponY;
+    }
+
+    // Setters
     public void setName(String name) {this.Name = name;}
     public void setDurability(float durability) {Durability = durability;}
     public void setDamageUp(float damageUp) {DamageUp = damageUp;}
@@ -27,4 +38,8 @@ public class Weapons
     public String getName() {return Name;}
     public float getDurability() {return Durability;}
     public boolean isOwned() {return Owned;}
+
+    public void draw(Graphics g, Board board) {
+    }
+    public int getPos(){return pos;}
 }

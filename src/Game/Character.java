@@ -1,4 +1,7 @@
-package Characters;
+package Game;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class Character
 {
@@ -7,6 +10,8 @@ public class Character
         public float Damage;
         public float XPPoints;
         public float Level;
+        public int Score;
+        public int pos;
 
             public Character(float HP, float energy, float damage, float xp,float lvl)
         {
@@ -39,4 +44,16 @@ public class Character
     public float getHP() { return HP; }
     public float getEnergy() { return Energy; }
 
+    public void tick() {
+    }
+
+    public void draw(Graphics g, Board board) {
+    }
+
+    public void keyPressed(KeyEvent e) {
+    }
+
+    public int getScore() { return Score;
+    }
+    public int getPos() {return pos;}
 }
